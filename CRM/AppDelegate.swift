@@ -7,8 +7,9 @@
 //
 
 import Cocoa
+import AppKit
 
-class AppDelegate: NSObject, NSApplicationDelegate, NSTableViewDataSource {
+class AppDelegate: NSObject, NSApplicationDelegate, NSTableViewDataSource, NSTableViewDelegate {
                             
     @IBOutlet weak var window: NSWindow!
     @IBOutlet weak var pharmaciesTableView: NSTableView!
@@ -18,10 +19,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTableViewDataSource {
         // Insert code here to initialize your application
         var pharmacy1 = NSEntityDescription.insertNewObjectForEntityForName("Pharmacy", inManagedObjectContext: managedObjectContext) as Pharmacy
         pharmacy1.name = "Pharmacy n1"
+        pharmacy1.street = "Street 1"
         var pharmacy2 = NSEntityDescription.insertNewObjectForEntityForName("Pharmacy", inManagedObjectContext: managedObjectContext) as Pharmacy
         pharmacy2.name = "Pharmacy n2"
+        pharmacy2.street = "Gorky park"
         var pharmacy3 = NSEntityDescription.insertNewObjectForEntityForName("Pharmacy", inManagedObjectContext: managedObjectContext) as Pharmacy
         pharmacy3.name = "Pharmacy new"
+        pharmacy3.street = "Prishvina St."
         managedObjectContext?.save(nil)
 
         pharmacies = [pharmacy1, pharmacy2, pharmacy3]
@@ -175,13 +179,29 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTableViewDataSource {
 
     func numberOfRowsInTableView(tableView: NSTableView!) -> Int
     {
-        return pharmacies.count
+        return pharmacies.count * 100
     }
 
     func tableView(tableView: NSTableView!, objectValueForTableColumn tableColumn: NSTableColumn!, row: Int) -> AnyObject!
     {
-        var pharmacy = pharmacies[row]
+        var pharmacy = pharmacies[row % 3]
         return pharmacy.name
+    }
+
+    func tableView(tableView: NSTableView!, viewForTableColumn tableColumn: NSTableColumn!, row: Int) -> NSView!
+    {
+        
+        //CustomCell *cellView = [tableView makeViewWithIdentifier:identifier owner:self];
+        var view = tableView.makeViewWithIdentifier(tableColumn.identifier, owner: self) as CustomCellView
+        var pharmacy = pharmacies[row % 3]
+        view.nameLabel.stringValue = pharmacy.name
+        view.addressLabel.stringValue = pharmacy.street
+        //var view = NSView(frame: NSRect(x: 0, y: 0, width: 100, height: 100))
+        var layer = CALayer()
+        layer.backgroundColor = CGColorCreateGenericRGB(1, 1, 0, 1)
+        view.wantsLayer = true
+        view.layer = layer
+        return view
     }
 }
 
