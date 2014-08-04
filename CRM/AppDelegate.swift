@@ -8,17 +8,33 @@
 
 import Cocoa
 
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, NSTableViewDataSource {
                             
     @IBOutlet weak var window: NSWindow!
-
-
+    @IBOutlet weak var pharmaciesTableView: NSTableView!
+    var pharmacies: [Pharmacy]! = []
+    
     func applicationDidFinishLaunching(aNotification: NSNotification?) {
         // Insert code here to initialize your application
+        var pharmacy1 = NSEntityDescription.insertNewObjectForEntityForName("Pharmacy", inManagedObjectContext: managedObjectContext) as Pharmacy
+        pharmacy1.name = "Pharmacy n1"
+        var pharmacy2 = NSEntityDescription.insertNewObjectForEntityForName("Pharmacy", inManagedObjectContext: managedObjectContext) as Pharmacy
+        pharmacy2.name = "Pharmacy n2"
+        var pharmacy3 = NSEntityDescription.insertNewObjectForEntityForName("Pharmacy", inManagedObjectContext: managedObjectContext) as Pharmacy
+        pharmacy3.name = "Pharmacy new"
+        managedObjectContext?.save(nil)
+
+        pharmacies = [pharmacy1, pharmacy2, pharmacy3]
+        pharmaciesTableView.reloadData()
+    }
+ 
+    override init(){
+        super.init()
     }
 
     func applicationWillTerminate(aNotification: NSNotification?) {
         // Insert code here to tear down your application
+        
     }
 
     // MARK: - Core Data stack
@@ -157,5 +173,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return .TerminateNow
     }
 
+    func numberOfRowsInTableView(tableView: NSTableView!) -> Int
+    {
+        return pharmacies.count
+    }
+
+    func tableView(tableView: NSTableView!, objectValueForTableColumn tableColumn: NSTableColumn!, row: Int) -> AnyObject!
+    {
+        var pharmacy = pharmacies[row]
+        return pharmacy.name
+    }
 }
 
