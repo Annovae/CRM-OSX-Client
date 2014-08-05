@@ -198,10 +198,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTableViewDataSource, NSTab
         view.addressLabel.stringValue = pharmacy.street
         //var view = NSView(frame: NSRect(x: 0, y: 0, width: 100, height: 100))
         var layer = CALayer()
-        layer.backgroundColor = CGColorCreateGenericRGB(1, 1, 0, 1)
+        layer.backgroundColor = NSColor.lightGrayColor().CGColor
         view.wantsLayer = true
-        view.layer = layer
+        //view.layer = layer
         return view
     }
 }
-
