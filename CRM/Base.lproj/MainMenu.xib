@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6205" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6205"/>
+        <plugIn identifier="com.apple.MapKitIBPlugin" version="6205"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -632,6 +633,18 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Window" systemMenu="window" id="Td7-aD-5lo">
                         <items>
+                            <menuItem title="Экран визитов" id="RGg-b4-CCP" userLabel="Экран визитов">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="openVisitsWindow:" target="Voe-Tx-rLC" id="7TS-BU-Rkx"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Экран планирования" id="cal-PM-jFf" userLabel="Экран планирования">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="openMainWindow:" target="Voe-Tx-rLC" id="61n-1u-aQk"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Minimize" keyEquivalent="m" id="OY7-WF-poV">
                                 <connections>
                                     <action selector="performMiniaturize:" target="-1" id="VwT-WD-YPe"/>
@@ -667,13 +680,13 @@
                 </menuItem>
             </items>
         </menu>
-        <window title="CRM" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
+        <window title="Экран планирования" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="335" y="390" width="609" height="417"/>
+            <rect key="contentRect" x="335" y="390" width="611" height="417"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1178"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="609" height="417"/>
+                <rect key="frame" x="0.0" y="0.0" width="611" height="417"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <scrollView autohidesScrollers="YES" horizontalLineScroll="76" horizontalPageScroll="10" verticalLineScroll="76" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ESG-ES-fVE">
@@ -788,15 +801,8 @@
                         </tableHeaderView>
                     </scrollView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="iaA-JJ-dVz">
-                        <rect key="frame" x="232" y="0.0" width="377" height="417"/>
+                        <rect key="frame" x="234" y="0.0" width="377" height="417"/>
                         <subviews>
-                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k5c-yu-QSz">
-                                <rect key="frame" x="270" y="372" width="87" height="19"/>
-                                <buttonCell key="cell" type="roundRect" title="Отправить" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="E7V-eG-IGh">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="controlContent"/>
-                                </buttonCell>
-                            </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lbU-GR-u53">
                                 <rect key="frame" x="285" y="283" width="74" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="200 000 р." id="jqS-8E-D0R">
@@ -893,6 +899,9 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <mapView mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="zpz-qJ-wrd">
+                                <rect key="frame" x="20" y="20" width="337" height="168"/>
+                            </mapView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LhU-zu-UbQ">
                                 <rect key="frame" x="59" y="367" width="258" height="30"/>
                                 <constraints>
@@ -907,19 +916,21 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="tam-kC-pVr" firstAttribute="leading" secondItem="GBb-Re-1aM" secondAttribute="leading" id="44V-lm-nc8"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="417" id="4yk-X5-u08"/>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="377" id="7uE-Pl-TMW"/>
                             <constraint firstItem="umU-nD-2W9" firstAttribute="trailing" secondItem="LVX-7q-F0X" secondAttribute="trailing" id="BP2-lW-lsB"/>
                             <constraint firstItem="umU-nD-2W9" firstAttribute="trailing" secondItem="lbU-GR-u53" secondAttribute="trailing" id="Bk2-AR-GZ0"/>
                             <constraint firstItem="fzC-YP-6gC" firstAttribute="top" secondItem="GBb-Re-1aM" secondAttribute="bottom" constant="10" id="FvR-ZX-7A6"/>
                             <constraint firstItem="umU-nD-2W9" firstAttribute="bottom" secondItem="tam-kC-pVr" secondAttribute="bottom" id="IOe-O1-9a9"/>
+                            <constraint firstItem="zpz-qJ-wrd" firstAttribute="leading" secondItem="iaA-JJ-dVz" secondAttribute="leading" constant="20" id="Ned-Rt-0lU"/>
                             <constraint firstItem="VKN-Au-gs5" firstAttribute="top" secondItem="xaX-ro-5JD" secondAttribute="bottom" constant="10" id="PjF-5d-bDD"/>
+                            <constraint firstItem="zpz-qJ-wrd" firstAttribute="top" secondItem="SAF-gi-PhZ" secondAttribute="bottom" constant="18" id="Q4Z-KR-0Ct"/>
                             <constraint firstItem="GBb-Re-1aM" firstAttribute="bottom" secondItem="lbU-GR-u53" secondAttribute="bottom" id="REJ-ll-off"/>
                             <constraint firstItem="LhU-zu-UbQ" firstAttribute="top" secondItem="iaA-JJ-dVz" secondAttribute="top" constant="20" id="TtN-0F-0Zy"/>
                             <constraint firstItem="tam-kC-pVr" firstAttribute="leading" secondItem="VKN-Au-gs5" secondAttribute="leading" id="VHl-VZ-fHy"/>
-                            <constraint firstItem="LhU-zu-UbQ" firstAttribute="centerY" secondItem="k5c-yu-QSz" secondAttribute="centerY" id="Vds-pa-Ogl"/>
                             <constraint firstItem="KSh-4y-hKM" firstAttribute="bottom" secondItem="SAF-gi-PhZ" secondAttribute="bottom" id="XZt-aV-ugG"/>
                             <constraint firstItem="tam-kC-pVr" firstAttribute="top" secondItem="fzC-YP-6gC" secondAttribute="bottom" constant="8" id="Zw2-AS-oZT"/>
-                            <constraint firstItem="k5c-yu-QSz" firstAttribute="trailing" secondItem="KbE-SQ-5P5" secondAttribute="trailing" id="coQ-td-Pfq"/>
+                            <constraint firstAttribute="trailing" secondItem="zpz-qJ-wrd" secondAttribute="trailing" constant="20" id="cfH-g4-zIJ"/>
                             <constraint firstItem="7xZ-nI-MgB" firstAttribute="bottom" secondItem="VKN-Au-gs5" secondAttribute="bottom" id="e0g-Qu-3Gm"/>
                             <constraint firstItem="GBb-Re-1aM" firstAttribute="top" secondItem="VKN-Au-gs5" secondAttribute="bottom" constant="10" id="eJz-LW-Nn6"/>
                             <constraint firstAttribute="trailing" secondItem="KbE-SQ-5P5" secondAttribute="trailing" constant="20" id="f5z-Al-gOh"/>
@@ -931,6 +942,7 @@
                             <constraint firstItem="xaX-ro-5JD" firstAttribute="leading" secondItem="iaA-JJ-dVz" secondAttribute="leading" constant="23" id="nXL-Op-gav"/>
                             <constraint firstItem="umU-nD-2W9" firstAttribute="trailing" secondItem="KSh-4y-hKM" secondAttribute="trailing" id="rol-Ak-ymi"/>
                             <constraint firstItem="KbE-SQ-5P5" firstAttribute="bottom" secondItem="xaX-ro-5JD" secondAttribute="bottom" id="x5u-7l-8hL"/>
+                            <constraint firstAttribute="bottom" secondItem="zpz-qJ-wrd" secondAttribute="bottom" constant="20" id="xpR-aS-UsC"/>
                             <constraint firstItem="tam-kC-pVr" firstAttribute="leading" secondItem="SAF-gi-PhZ" secondAttribute="leading" id="yMM-Dy-HEw"/>
                             <constraint firstItem="umU-nD-2W9" firstAttribute="trailing" secondItem="7xZ-nI-MgB" secondAttribute="trailing" id="yNC-Bd-6lO"/>
                             <constraint firstItem="umU-nD-2W9" firstAttribute="trailing" secondItem="KbE-SQ-5P5" secondAttribute="trailing" id="zdI-ET-8Qk"/>
@@ -942,13 +954,13 @@
                     <constraint firstItem="ESG-ES-fVE" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" id="G9n-rj-OdB"/>
                     <constraint firstAttribute="bottom" secondItem="iaA-JJ-dVz" secondAttribute="bottom" id="NIR-Be-Bmg"/>
                     <constraint firstItem="ESG-ES-fVE" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" id="XlQ-d4-l7j"/>
-                    <constraint firstItem="iaA-JJ-dVz" firstAttribute="leading" secondItem="ESG-ES-fVE" secondAttribute="trailing" constant="-2" id="baI-u5-nWC"/>
+                    <constraint firstItem="iaA-JJ-dVz" firstAttribute="leading" secondItem="ESG-ES-fVE" secondAttribute="trailing" id="baI-u5-nWC"/>
                     <constraint firstAttribute="bottom" secondItem="ESG-ES-fVE" secondAttribute="bottom" id="jQ4-Ij-enY"/>
                     <constraint firstAttribute="trailing" secondItem="iaA-JJ-dVz" secondAttribute="trailing" id="qTn-df-BUO"/>
                     <constraint firstItem="iaA-JJ-dVz" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" id="yaX-R8-HsZ"/>
                 </constraints>
             </view>
-            <point key="canvasLocation" x="201.5" y="193.5"/>
+            <point key="canvasLocation" x="225.5" y="-139.5"/>
         </window>
         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="bDt-ws-Zpk">
             <rect key="frame" x="0.0" y="0.0" width="97" height="17"/>

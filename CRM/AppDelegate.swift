@@ -8,12 +8,14 @@
 
 import Cocoa
 import AppKit
+import MapKit
 
 class AppDelegate: NSObject, NSApplicationDelegate, NSTableViewDataSource, NSTableViewDelegate {
-                            
+    
     @IBOutlet weak var window: NSWindow!
     @IBOutlet weak var pharmaciesTableView: NSTableView!
     var pharmacies: [Pharmacy]! = []
+    var visitsScreen: VisitsScreenController!
     
     func applicationDidFinishLaunching(aNotification: NSNotification?) {
         // Insert code here to initialize your application
@@ -34,6 +36,34 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTableViewDataSource, NSTab
  
     override init(){
         super.init()
+    }
+
+    @IBAction func openVisitsWindow(sender: AnyObject)
+    {
+        if (visitsScreen == nil)
+        {
+            visitsScreen = VisitsScreenController(windowNibName: "VisitsScreenController")
+            visitsScreen.showWindow(self)
+        }
+        else
+        {
+            var window: NSWindow = visitsScreen.window
+            window.makeKeyAndOrderFront(self)
+
+            visitsScreen.window.makeKeyAndOrderFront(self)
+        }
+    }
+
+    @IBAction func openMainWindow(sender: AnyObject)
+    {
+        if (false || window == nil)
+        {
+            window.makeKeyAndOrderFront(self)
+        }
+        else
+        {
+            window.makeKeyAndOrderFront(self)
+        }
     }
 
     func applicationWillTerminate(aNotification: NSNotification?) {
